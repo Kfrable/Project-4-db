@@ -4,51 +4,43 @@ CREATE DATABASE beverage_index;
 \c beverage_index
 
 
--- Create Table beverages(
--- 		ID SERIAL PRIMARY KEY,
--- 		name VARCHAR,
--- 		description VARCHAR,
--- 		fid INTEGER,
--- 		Company VARCHAR,
--- 		style VARCHAR,
--- 		type VARCHAR
+-- DROP TABLE IF EXISTS food_pairings CASCADE; 
 
--- );
-CREATE TABLE styles (              
-        ID SERIAL PRIMARY KEY,      
-        name VARCHAR,
-        description VARCHAR
-        
-);
-
-CREATE TABLE food_pairings (
+/*CREATE TABLE food_pairings  (
 		ID SERIAL PRIMARY KEY,
 		name VARCHAR,
 		description VARCHAR
-);
+);*/
 
+DROP TABLE IF EXISTS wines;
 CREATE TABLE wines (
 		ID SERIAL PRIMARY KEY,
 		name VARCHAR,
 		description VARCHAR,
-		Fid INTEGER
+		color VARCHAR,
+		origin VARCHAR,
+		food VARCHAR
 );
 
+DROP TABLE IF EXISTS beers; 
 CREATE TABLE beers (
 		ID SERIAL PRIMARY KEY,
 		name VARCHAR,
 		description VARCHAR,
-		Fid INTEGER,
+		Food TEXT, 
 		style VARCHAR,
-		company VARCHAR
+		company VARCHAR,
+		abv text
+
 
 );
 
+-- DROP TABLE IF EXISTS waters CASCADE;
 CREATE TABLE waters (
 		ID SERIAL PRIMARY KEY,
 		name VARCHAR,
 		description VARCHAR,
-		Fid INTEGER
+		Fid INTEGER /*REFERENCES food_pairings(ID)*/
 );
 
 CREATE TABLE related (
@@ -58,76 +50,136 @@ CREATE TABLE related (
 		Rid INTEGER
 );
 
-
--- INSERT INTO beverages(name, description, fid, company, style, type) VALUES
--- ('Chardonnay','Chardonnay is a green-skinned grape variety used in the production of white wine. The variety originated in the Burgundy wine region of eastern France, but is now grown wherever wine is produced, from England to New Zealand.',1,'wine'),
-
--- ('Pinot noir', 'Pinot noir is a red wine grape variety of the species Vitis vinifera. The name may also refer to wines created predominantly from Pinot noir grapes.',4,'wine'),
-
--- ('Sauvignon blanc', 'Sauvignon blanc is a green-skinned grape variety that originates from the Bordeaux region of France. The grape most likely gets its name from the French words sauvage and blanc due to its early origins as an indigenous grape in South West France',3,'wine'),
-
--- ('Cabernet Sauvignon', 'Cabernet Sauvignon is one of the worlds most widely recognized red wine grape varieties. It is grown in nearly every major wine producing country among a diverse spectrum of climates from Canadas Okanagan Valley to Lebanons Beqaa Valley',3,'wine'),
-
--- ('Merlot','Merlot is a dark blue-colored wine grape variety, that is used as both a blending grape and for varietal wines',3,'wine'),
-
--- ('Gewürztraminer', 'Many grape names redirect here. Gewürztraminer is an aromatic wine grape variety, used in white wines, and performs best in cooler climates. In English, it is sometimes referred to colloquially as Gewürz, and in French it is written Gewurztraminer.',3,'wine'),
-
--- ('Sangiovese', 'Sangiovese is a red Italian wine grape variety that derives its name from the Latin sanguis Jovis, "the blood of Jupiter"', 3,'wine'),
-
--- ('Rosé', 'A rosé is a type of wine that incorporates some of the color from the grape skins, but not enough to qualify it as a red wine. It may be the oldest known type of wine, as it is the most straightforward to make with the skin contact method',3,'wine'),
-
--- ('Zinfandel', 'Zinfandel is a variety of black-skinned wine grape. The variety is grown in over 10 percent of California vineyards',3,'wine'),
-
--- ('Anderson Valley', 'fruity, with a bitter taste', 1, 'Sour','Beer'),
-
--- ('Evil Twin Double Barrel Jesus', 'thick fudge-like body, pitch black color, amazingly overwhelming aromas of chocolate, coffee, dark fruits and muscovado sugar and by all means aged in barrels and blended into a this very unique and rare tasting version standing in front of you. ', 1, 'American Double / Imperial Stout','Beer'),
-
--- ('Miller Lite', 'Miller Lite is the original light beer. Frederick Miller had an idea that a beer could be light but didnt have to sacrifice on taste, and weve held true to that idea since 1975. ', 3, ' pilsner light beer ','Beer'),
-
--- ('Bud ', 'Budweiser is an American-style pale lager produced by Anheuser-Busch, currently part of the multinational corporation Anheuser-Busch InBev.', 3, ' American-style pale lager','Beer' ),
-
--- ('coors light', 'Coors Light is a 4.2% ABV light beer brewed in Golden, Colorado and Milwaukee, Wisconsin. It was first produced in 1978 by the Coors Brewing Company', 3, ' light beer','Beer'),
-
--- ('YARDS IPA', 'Standing firmly on the east coast end of American IPAs, our India Pale Ale emphasizes balance. Traditional floor-malted English barley gives IPA its firm malt character while generous amounts of Chinook and Amarillo hops impart aromas of pine and tangerine for a perfectly balanced IPA.', 4, 'IPA','Beer'),
-
--- ('YARDS ESA', 'Our first-ever and most-beloved brew, ESA helped establish a following for cask-conditioned beer in the United States back in the ‘90s. East Kent Golding hops give this British-inspired ale a subtle spiciness, which complements the strong malt backbone. ESA is floral, earthy and smooth with hints of chocolate and caramel, rounding out this deep chestnut-colored ale', 4, 'English Ale','Beer'),
-
--- ('PETRUS SOUR QUAD ', 'From the innovators at Brouwerij De Brabandere we have something totally new: a Sour Quad. The Petrus Sour Quad is a limited edition blend of quadruple and 30% Petrus Aged Pale. The quadruple is a complex, dark, malty beer made from 5 different malts. Adding Petrus Aged Pale, pure foeder beer, to the full bodied strong quadruple creates a refreshing and complex taste.', 6, 'QUAD','Beer'),
-
--- ('60 minute IPA', '60 Minute is brewed with a slew of great Northwest hops. A powerful but balanced East Coast IPA with a lot of citrusy hop character, it’s the session beer for hardcore enthusiasts!', 4, 'IPA','Beer'),
-
--- ('90 minute IPA', 'Esquire Magazine calls our 90 Minute I.I.PA., "perhaps the best I.P.A. in America." An Imperial I.P.A. brewed to be savored from a snifter. A big beer with a great malt backbone that stands up to the extreme hopping rate. This beer is an excellent candidate for use with Randall The Enamel Animal! ', 4, 'Imperial IPA','Beer'),
-
--- ('Miller High Life', 'THERE’S A WHOLE LOT OF TRADITION THAT GOES INTO MAKING MILLER HIGH LIFE. WE BREW THE GOLDEN PILSNER WITH THE YEAST OUR FOUNDER BROUGHT OVER FROM GERMANY, LIGHT STABLE GALENA HOPS FROM THE PACIFIC NORTHWEST, AND A SELECT COMBINATION OF MALTED BARLEY. THIS COMBINATION MADE IT A FAVORITE IN 1903, AND IT REMAINS ONE TODAY.', 1, 'American-style Pilsner','Beer'),
-
--- ('Heinken', 'Heineken Lager Beer, or simply Heineken is a pale lager beer with 5% alcohol by volume produced by the Dutch brewing company Heineken International. Heineken is well known for its signature green bottle and red star', 3, 'pale lager beer','Beer'),
-
--- ('Summer Shandy', 'Leinenkugels Summer Shandy is our traditional weiss beer with refreshing natural lemonade flavor that makes it the perfect summer beer', 4, 'weiss beer','Beer');
+Drop TABLE IF EXISTS coffee;
+CREATE TABLE coffee (
+		ID SERIAL PRIMARY KEY,
+		name VARCHAR,
+		description VARCHAR,
+		origin TEXT
+);
 
 
-INSERT INTO styles(name, description) VALUES  
+
+
+
+/*INSERT INTO styles(name, description) VALUES  
 ('Sour', 'the best'); 
 
 INSERT INTO food_pairings(name, description) VALUES
-('fish', 'good pairing');
+('fish', 'good pairing');*/
 
-INSERT INTO wines(name, description, Fid) VALUES
-('red', 'sweet', 1),
-('Chardonnay','Chardonnay is a green-skinned grape variety used in the production of white wine. The variety originated in the Burgundy wine region of eastern France, but is now grown wherever wine is produced, from England to New Zealand.',1),
-('Pinot noir', 'Pinot noir is a red wine grape variety of the species Vitis vinifera. The name may also refer to wines created predominantly from Pinot noir grapes.',4),
-('Sauvignon blanc', 'Sauvignon blanc is a green-skinned grape variety that originates from the Bordeaux region of France. The grape most likely gets its name from the French words sauvage and blanc due to its early origins as an indigenous grape in South West France',3),
-('Cabernet Sauvignon', 'Cabernet Sauvignon is one of the worlds most widely recognized red wine grape varieties. It is grown in nearly every major wine producing country among a diverse spectrum of climates from Canadas Okanagan Valley to Lebanons Beqaa Valley',3),
-('Merlot','Merlot is a dark blue-colored wine grape variety, that is used as both a blending grape and for varietal wines',3),
-('Gewürztraminer', 'Many grape names redirect here. Gewürztraminer is an aromatic wine grape variety, used in white wines, and performs best in cooler climates. In English, it is sometimes referred to colloquially as Gewürz, and in French it is written Gewurztraminer.',3),
-('Sangiovese', 'Sangiovese is a red Italian wine grape variety that derives its name from the Latin sanguis Jovis, "the blood of Jupiter"', 3),
-('Rosé', 'A rosé is a type of wine that incorporates some of the color from the grape skins, but not enough to qualify it as a red wine. It may be the oldest known type of wine, as it is the most straightforward to make with the skin contact method',3),
-('Zinfandel', 'Zinfandel is a variety of black-skinned wine grape. The variety is grown in over 10 percent of California vineyards',3);
+INSERT INTO wines(name,description,color,origin,food) VALUES
 
-INSERT INTO beers(name, description, Fid, style) VALUES
-('Anderson Valley', 'fruity, with a bitter taste', 1, 'Sour'),
-('Evil Twin Double Barrel Jesus', 'thick fudge-like body, pitch black color, amazingly overwhelming aromas of chocolate, coffee, dark fruits and muscovado sugar and by all means aged in barrels and blended into a this very unique and rare tasting version standing in front of you. ', 1, 'American Double / Imperial Stout'),
+('Chardonnay','Chardonnay is a green-skinned grape variety used in the production of white wine. The variety originated in the Burgundy wine region of eastern France, but is now grown wherever wine is produced, from England to New Zealand.','White Wine','France, Burgundy','perfect with light and delicate food such as raw and lightly cooked shellfish like crab and prawns, steamed or grilled fish, fish pâtés, fish, chicken or vegetable terrines and pasta or risotto with spring vegetables. They also go well with creamy vegetable soups.'),
+('Pinot noir','Pinot noir is a red wine grape variety of the species Vitis vinifera. The name may also refer to wines created predominantly from Pinot noir grapes.','White Wine','France','pairs well with a wide range of foods—fruitier versions make a great match with salmon or other fatty fish, roasted chicken or pasta dishes; bigger, more tannic Pinots are ideal with duck and other game birds, casseroles or, of course, stews like beef bourguignon.'),
+('Sauvignon blanc','Sauvignon blanc is a green-skinned grape variety that originates from the Bordeaux region of France. The grape most likely gets its name from the French words sauvage and blanc due to its early origins as an indigenous grape in South West France','White Wine','France','Cheese (especially goat cheese), Green vegetables (asparagus, zucchini, fresh peas, artichokes), Oysters, Delicate fish like sole Fresh herbs, Mild viniagrettes, Dishes with tangy dairy ingredients, Herbal, briny sauces.'),
+
+('Cabernet Sauvignon','Cabernet Sauvignon is one of the worlds most widely recognized red wine grape varieties. It is grown in nearly every major wine producing country among a diverse spectrum of climates from Canadas Okanagan Valley to Lebanons Beqaa Valley','Red Wine','France','Braised Beef Short Ribs, Simple Meatballs, Roasted Duck Breast with Pecan Purée'),
+('Merlot','Merlot is a dark blue-colored wine grape variety, that is used as both a blending grape and for varietal wines','Red Wine','France','Grilled Flat Iron Steak with Blue Cheese Butter, Mediterranean Lamb Burgers, Roast Chicken with Thyme and Onions.'),
+('Gewürztraminer','Many grape names redirect here. Gewürztraminer is an aromatic wine grape variety, used in white wines, and performs best in cooler climates. In English, it is sometimes referred to colloquially as Gewürz, and in French it is written Gewurztraminer.','White wine','France, Alsace','Duck, Chicken, Pork, Bacon, Shrimp and Crab.'),
+
+('Rosé','A rosé is a type of wine that incorporates some of the color from the grape skins, but not enough to qualify it as a red wine. It may be the oldest known type of wine, as it is the most straightforward to make with the skin contact method','Red Wine','France','principally light salads, light pasta and rice dishes, especially with seafood, raw and lightly cooked shellfish and grilled fish and goats cheeses. Perfect hot weather drinking.'),
+('Zinfandel','Zinfandel is a variety of black-skinned wine grape. The variety is grown in over 10 percent of California vineyards','Red Wine','Croatia','Zinfandel wine is happiest when paired with anything from the meat aisle, from barbeque pork ribs, leg of lamb or a big, hearty meal. A lighter Zinfandel wine is a wonderful red wine food pairing choice for poultry and game fowl, especially when served with a heavier sauce.'),
+('Sangiovese','Sangiovese is a red Italian wine grape variety that derives its name from the Latin sanguis Jovis,the blood of Jupiter','Red Wine','Italy','A Sangiovese with high tannins will work perfectly with rich roasted meat, cured sausages and hard cheeses. When pairing Sangiovese wine with vegetarian fare, be sure to work with lipids like butter and olive oil so that the richness in the fat helps cut through the wines tannins.'),
+
+('Riesling','Riesling is a white grape variety which originated in the Rhine region of Germany. Riesling is an aromatic grape variety displaying flowery, almost perfumed, aromas as well as high acidity.','White wine','Germany','These bright, citrusy Rieslings are similar to Sauvignon Blanc. They are delicious with foods that have "green" flavors, like the lime, jalapeño and tomatillo in this snapper dish. Their vibrant acidity and minerality can also be terrific with rich dishes flavored with a squeeze of lime, like beef curry.'),
+('Shiraz','Syrah, is a dark-skinned grape variety grown throughout the world and used primarily to produce red wine. In 1999, Syrah was found to be the offspring of two obscure grapes from southeastern France, Dureza and Mondeuse Blanche.','Red Wine','France, Rhône wine region','Just pick up a bottle of the countrys quintessential wine – a rich, quaffable, bold Shiraz – and pair it with an Aussie-approved dish. The intense, fruity wine that comes from the Syrah grape pairs well with meat, barbecue flavours, dark chocolate and fruit.'),
+('Malbec','Malbec is a purple grape variety used in making red wine. The grapes tend to have an inky dark color and robust tannins, and are known as one of the six grapes allowed in the blend of red Bordeaux wine.','Red Wine','France','Malbec goes well with lean cuts of meat like flank, sirloin and skirt steak. Even when you want to change it up a bit, this bold wine pairs perfectly with chicken and other meats like lamb and pork.'),
+
+('Cabernet Franc','Cabernet Franc is one of the major black grape varieties worldwide. It is principally grown for blending with Cabernet Sauvignon and Merlot in the Bordeaux style, but can also be vinified alone, as in the Loires Chinon.','Red Wine','France, Bordeaux, Libournais','roast chicken, pork, roasted or grilled, beef, duck, sausage, lamb, veal, hearty fish dishes and even hard as well as soft cheese.'),
+('Grenache','Grenache or Garnacha is one of the most widely planted red wine grape varieties in the world. It ripens late, so it needs hot, dry conditions such as those found in Spain, where the grape most likely originated.','Red Wine','Spain','Grenache pairs perfectly with grilled, stewed and braised meats like beef, veal, pork, chicken and of course game. Grenache holds up well to hearty dishes like cassoulet and it is a good match for less spicy styles of Asian cooking. The grape enjoys worldwide popularity in numerous growing areas.'),
+('Tempranillo','Tempranillo is a black grape variety widely grown to make full-bodied red wines in its native Spain. Its name is the diminutive of the Spanish temprano, a reference to the fact that it ripens several weeks earlier than most Spanish red grapes','Red Wine','Spain','The acidity and fruit in the wine will work with most Mexican foods, but be careful that the food is not overly spicy or it will overpower the wine.'),
+
+('Pinotage','Pinotage PIN-ə-tahzh is a red wine grape that is South Africas signature variety. It was bred there in 1925 as a cross between Pinot noir and Cinsaut.','Red Wine','South Africa, Stellenbosch','deal match for a hot curry, spicy barbecue, or robust meat dishes. It’s no coincidence that these bold flavours are a mainstay of South African cuisine.');
+-- ('Sherry',' fortified wine made from white grapes that are grown near the town of Jerez de la Frontera in Andalusia, Spain. Sherry is produced in a variety of styles made primarily from the Palomino grape, ranging from light versions similar to white table wines, such as Manzanilla and Fino, to darker and heavier versions that have been allowed to oxidise as they age in barrel, such as Amontillado and Oloroso. Sweet dessert wines are also made from Pedro Ximenez or Moscatel grapes, and are sometimes blended with Palomino-based Sherries.','h');
+
+
+INSERT INTO beers(name,description,food,style,company,abv) VALUES
+('120 Minute IPA','Too extreme to be called beer? 120 Minute IPA is brewed to a colossal 45-degree plato, boiled for a full two hours while being continuously hopped with high-alpha American hops, then dry-hopped daily in the fermenter for a month and aged for another month on whole-leaf hops!','Try Avery Maharaja with ham.','
+Imperial IPA','Dog Fish','15 - 20%'),
+('60 Minute IPA','60 Minute is brewed with a slew of great Northwest hops. A powerful but balanced East Coast IPA with a lot of citrusy hop character, it is the session beer for hardcore enthusiasts!','Kale Salad With Avocado & Edamame','India Pale Ale','Dog Fish','6.0%'),
+('90 Minute IPA','90 Minute IPA was the first beer we continuously hopped, allowing for a pungent -- but not crushing -- hop flavor.','Sweeter double IPAs like Southern Tier Unearthly, Surly Abrasive, and Dogfish Head 90 Minute IPA have flavors that are almost like the syrupy juice in a can of fruit. These are great with barbecued meats smothered in sweet, tomato and brown sugar based sauce. The beer catches the caramelization of the meat and finds subtle fruity flavors in the sauce.','Imperial IPA','Dog Fish','
+9.0%'),
+('Alternate Takes #4','Alternate Takes #4 is our funky farmhouse ale bursting with notes of juicy apricot, earthy sourness & balanced hints of vanilla & oak. It begins its life on French-Oak wine barrels where it is fermented with brettanomyces for 7 months before being blended with apricots & re-fermented with a Belgian Saison yeast.','Usually served with fatty meats, beef would be highly recommended','American Wild Ale ','Dog fish','8.10%'),
+('Alternate Takes #5','Alternate Takes #5 is our fruit-forward sour beer rounded by tartness & hints of vanilla & oak. This beer started as a blonde ale fermented with raspberries & aged in red wine barrels with brettanomyces & lactobacillus before being blended & additionally aged with insane amounts of blueberry. The mild brett funk plays well off the bright berry character which is balanced by a soft lactic sourness.','Mussels and other seafoods with a squirt of fresh lemon and/or drawn butter','Sour','Dog fish','8%'),
+('Beer for Breakfast','A stout tricked out with all sorts of breakfast ingredients including Guatemalan Antigua cold press coffee, Maple syrup harvested from Western Massachusetts and for the quintessential Delaware breakfast touch - Rapa Scrapple and their secret blend of spices.','Yogurt and Granola Parfait & Rogue Hazelnut Brown Nectar','Stout','Dog Fish','7.4%'),
+('Burton Baton','When enjoying the Burton Baton, you will find an awesome blend of the citrus notes from Northwestern hops melding with woody, vanilla notes from the oak. The wood also tends to mellow the 10% ABV of Burton, so tread cautiously!','Parmigiano Reggiano or a similar hard, dry, salty cheese to cut through the rich sweet side of the beer.','Wood-Aged','Dog Fish','10.0%'),
+('Namaste White','A witbier bursting with good karma. Made with dried organic orange slices, fresh-cut lemongrass and a bit of coriander, this Belgian-style white beer is a great thirst quencher.','As long as you have fuit included with a dish, your beer in this case will complement the food.','White Ale','Dog Fish','
+4.8%'),
+-- dogfish^
+
+('REBEL JUICED IPA','Swirling with ripe aromas of mango and tropical fruits, this IPA is jam-packed with juicy, citrusy hops and mango juice.  It’s as if we took fresh hops and mangos and put them in a juicer.','NA','Tropical IPA','Samuel Adams
+','6.2%'),
+('REBEL GRAPEFRUIT IPA','Rebel Grapefruit is brewed with real grapefruit for a big punch of citrus that amplifies the tropical fruit and citrus notes of one of the Sam Adams brewers’ favorite West Coast hops, Mosaic.','NA','Grapefruit Indian Pale Ale','Samuel Adams','6.3%'),
+('REBEL ROUSER IPA','Bold, citrusy, and piney, our double IPA isn’t just a bigger version of Rebel IPA. Instead we explored a different balance of hop character, including Bravo & Galaxy hops, and upped the ante on their flavor and expression for a brew that’s intense yet enjoyable through every sip.','NA','Double India Pale Ale','Samuel Adams','8.4%'),
+('REBEL WHITE CITRA IPA','This single-hopped IPA is a result of our exploration with Citra hops, a variety that has become popular for its intense citrus and tropical aromas and flavors. This slightly hazy IPA is bursting with grapefruit, orange, and tropical notes with a touch of white wheat.','NA','CITRA IPA','Samuel Adams','7.3%'),
+-- sam^
+
+('Miller Lite','Miller Lite is the original light beer. Frederick Miller had an idea that a beer could be light but didnt have to sacrifice on taste, and weve held true to that idea since 1975.','Fatty foods such as chicken wings are perfect!','Pilsner','MillerCoors','4.2%'),
+('Bud Light','Bud Light is brewed using a blend of premium aroma hop varieties, both American-grown and imported, and a combination of barley malts and rice. Its superior drinkability and refreshing flavor makes it the worlds favorite light beer.','Fatty foods such as chicken wings are perfect!','pale lager','Anheuser-Busch','4.2%'),
+('Coors Light','Brewed in the roclies for pure enjoyment','Fatty foods such as chicken wings are perfect!','American Light Lager','MillerCoors','4.2% '),
+-- lightbeers^
+
+('PHILADELPHIA PALE ALE','Not to be boastful, but we honestly believe all other ales pale in comparison to ours. Dry-hopped with an abundance of distinctive Simcoe hops, this straw-colored pale ale is more drinkable than bitter, more aromatic than aggressive. Philly Pale Ale, as it’s better known, is crisp, hoppy and bursting with citrus.','Philly Pale Ales vibrant floral and citrus aroma and soft malt character complement lighter fare including salads with citrus-based vinaigrettes, cured or poached salmon and fresh Jersey tomatoes. But it is equally as good with a hot dog and peanuts at the ballpark.','Pale Ale','Yards Brewing Company','4.6%'),
+('BRAWLER','The most approachable of our ales, Brawler is malt forward and delicately hopped for a knockout flavor. Its smooth character, hints of caramel and toast and remarkable drinkability define this ruby-colored brew as a knockout session ale.','Brawlers bready essence and luscious malts lend a sweetness that brings out flavors in margherita pizza and slow cooked BBQ. Its lower alcohol content makes it a great partner for spicier dishes as well.',' English Mild','Yards brewing Company','4.2%'),
+('YARDS IPA','Standing firmly on the east coast end of American IPAs, our India Pale Ale emphasizes balance. Traditional floor-malted English barley gives IPA its firm malt character while generous amounts of Chinook and Amarillo hops impart aromas of pine and tangerine for a perfectly balanced IPA.','IPA is a robust beer that needs robust flavors. Pair with sharp cheeses like aged cheddars, grilled lamb chops and tomato pie.',' American IPA','Yards Brewing Company','7.0%'),
+('LOVE STOUT','Our brewers have poured their hearts and roasted malts into this rich, well-rounded stout. Luscious notes of coffee and chocolate accent Love Stouts smooth, creamy mouth feel. We will not apologize for any amorous affairs resulting from the consumption of this beverage!','Love Stout and oysters are a match made in heaven, but this sweetheart also gets along well with rich, sweet treats, soft cheeses and winter stews.',' Dry Stout','Yards Brewing Company',' 5.5%'),
+('EXTRA SPECIAL ALE','Our first-ever and most-beloved brew, ESA helped establish a following for cask-conditioned beer in the United States back in the ‘90s. East Kent Golding hops give this British-inspired ale a subtle spiciness, which complements the strong malt backbone. ESA is floral, earthy and smooth with hints of chocolate and caramel, rounding out this deep chestnut-colored ale.','ESAs seamless blend of malts and earthy hops align perfectly with grilled or braised meats, hard cheeses and roasted veggies.','English Ale','Yards Brewing Company',' 6.0%'),
+('GOLDEN HOP IPA','This light-bodied IPA soars with the tropical notes of tangerine, mango and grapefruit from Mosaic and Amarillo hops and bright floral and citrus undertones from Cascade in the hopback.','Golden Hop IPAs crisp melon and citrus flavors pair well with cured meats like salami, kale salads with pickled vegetables, aged pecorino or any Spanish tapas you can find.','IPA','Yards Brewing Company',' 6.0%'),
+('SAISON','Saisons were originally brewed to keep farmhands happy and hydrated during the warm summer months. Our Saison, a summer wheat ale, is brewed with Belgian yeast, malted summer wheat and Styrian Goldings, which lend a touch of hoppiness to the palate. This refreshing blonde-colored ale is characterized by delicate notes of banana, clove and a subtle spice.',' Saison is the perfect complement to anything you can throw on the fire. We like pairing it with various types of sausage, a pot of mussels or the myriad flavors and complex spices of Southeastern Asian cuisine.',' Saison','Yards Brewing Company',' 6.5%'),
+('SONS OF BEN','Sons of Ben Rowdy Ale is characterized by a subtle, yet distinct Belgian yeast, 100% pale malt and floral, American hops. Cascade in the hopback and dry hopped Amarillo and Cascade lends spirited notes of orange and grapefruit. Approachable and easy drinking, this beer is brewed with a whole lot of hometown pride. Perfect for fans during the game and players relaxing post-match, Sons of Ben pale ale is now available for the first time in bottles! Yards is also proud be a sponsor of the Philadelphia Union. Cheer on the Union and enjoy several offerings from Yards in the stadiums beer garden. #DOOP',' Sons of Ben pairs well with getting rowdy while tailgating at Philadelphia Union games. Grab a few cheeseburgers or hot dogs and if you still have room, finish with a soft pretzel for dessert.','Belgian Pale Ale','Yards Brewing Company','5.0%'),
+('PYNK','Yards PYNK is a beer like no other. We add 3,300 pounds of sour and sweet cherries and raspberries to each batch, resulting in a tart berry ale that’s effervescent and pleasantly pink in color. Delighting the palate, this light-bodied brew finishes refreshingly dry. We are proud to donate 1 dollar from every case and 5 cents from every pint of PYNK sold to breast cancer research and awareness. Since 2013, we have raised over $18,000 for the Tyanna Foundation!','PYNKs dry character and effervescence lends itself to light salads, country terrine and delicately fried seafood. Pair with panna cotta for a delicate and refined dessert experience!',' Fruit Beer','Yards Brewing Company','5.5%'),
+('RIVAL IPA','Contrary to its name, Rival’s ingredients work in perfect harmony for a bold, balanced IPA. The recipe starts with a base of pale crystal and rye malts, and Bravo and Nugget bittering hops. Then whole flower Chinook hops go into the hopback, extracting that signature pine character. Finally, Rival is dry hopped with Centennial, Citra, Simcoe and Columbus hops, giving this amber-colored IPA a complex citrus profile.','Rival IPA is a bold ale that can go toe-to-toe with spicy foods. Enjoy with an Italian hoagie and long hots or kung pao chicken with dan dan noodles.',' West Coast Style IPA','Yards Brewing Company','6.2%'),
+('THOMAS JEFFERSONS TAVERN ALE','This powerful and complex golden ale pays homage to our Founding Father and fellow brewer, Thomas Jefferson. Yards Brewmaster, Tom Kehoe, worked closely with Philadelphia’s historic City Tavern to recreate this recipe, employing honey, rye and wheat, just like the beer brewed at Monticello.','Although Jefferson may have preferred to snack on the bounty of vegetables and herbs from his garden at Monticello, you may want to offset this beer’s potency with something hearty, filling and dare we say “fatty,” like roast duck, pork chops with sage butter, or charcuterie.',' Strong Golden Ale','Yards Brewing Company','8.0%'),
+('GENERAL WASHINGTONS TAVERN PORTER','Detailed in a letter from the General to his officers during the war, Washington’s recipe employed molasses to aid fermentation and give rich caramel notes to this robust, roasty ale. The recipe reflected his admiration for Philadelphia-style porters, especially those brewed by Robert Hare (whose original brewery stood just blocks from where ours is now). Our Tavern Porter, inspired by Washington’s, is dark, smooth and complex with just a hint of dried fruit in the finish.','Tavern Porter’s dark malts and molasses pair well with rich and roasty flavors. Sip alongside a burger topped with Gruyere and caramelized onions or a Sunday pot roast. And make sure to save some for any dessert involving chocolate and vanilla.
+','Porter','Yards Brewing Company',' 7.0%'),
+('POOR RICHARDS TAVERN SPRUCE','Based on Benjamin Franklin’s original recipe, which called for barley, molasses and essence of spruce, our Tavern Spruce is as approachable and engaging as the man himself. We source blue spruce clippings from a local organic farm, Indian Orchards, steeping them in the kettle to create this one-of-a-kind deep amber ale.',' Tavern Spruces complex flavors and spruce essence marry well with foods characterized by Asian and Mediterranean ingredients. Tavern Spruce also makes a terrific marinade for many dishes. Try it with rosemary-roasted pork tenderloin or noodle-based dishes, especially those featuring ginger or ingredients like basil and olives.',' Historical Spiced Ale','Yards Brewing Company','5.0%'),
+('CAPE OF GOOD HOPE DOUBLE IPA','Though the recipe changes year to year, this West-Coast style double IPA always embodies the adventurous spirit of the original India Pale Ales – and each year’s release promises to take you on an epic journey. This years batch bursts with notes of citrus, melon and pine from Ella, Azacca, Galaxy, Mosaic, Citra, Chinook, Citra and whole flower Cascade hops. Cape of Good Hope is a limited-release beer, available for one month only in 12-oz bottles and draught.','Think of Cape of Good hope as the main course. For a side dish, how about a cranberry walnut salad with lemon vinaigrette? Have another Cape for dessert.','West Coast Style Double IPA','Yards Brewing Company',' 9.7%'),
+('CHOCOLATE LOVE STOUT','Passionately brewed with over 200 pounds of pure, 100% cacao Belgian dark chocolate, this irresistibly smooth stout explodes with the taste and aroma of rich, dark chocolate goodness. This deep black beauty will seduce you with her roasty maltiness and hints of vanilla and caramel.',' Chocolate Love Stout likes long walks on the beach, candlelit dinners, big comfy beds, cabins with fireplaces, scenic overlooks… you get the picture.','Chocolate Stout','Yards Brewing Company',' 6.9%'),
+('WASHINGTONS RESERVE','We set aside a portion of every batch of General Washingtons Tavern Porter in freshly emptied bourbon barrels shipped straight from Kentucky. The beer ages for six months, absorbing vanilla, oak and bourbon flavors from the barrel walls. Our Washingtons Reserve is the end result – a smooth, aromatic porter with hints of dried fruit in the finish and vanilla on the nose.','We think Washington would have paired this aromatic porter with a steak smothered in rich, burgundy mushroom gravy. The vanilla characteristics of Washingtons Reserve go great with desserts like cherries jubilee or bananas Foster.','Barrel-Aged Strong Porter','Yards Brewing Company',' 7.0%'),
+('IBG GRAPEFRUIT PALE ALE','IBG Grapefruit Pale Ale starts with Centennial hops in the boil. Next, whole flower Cascade hops go into the hop back giving the beer a subtle lemon undertone. Then this golden-colored pale ale gets zinged with grapefruit zest and dry hopped with tangerine-like Azacca hops completing an inviting citrus profile that can only be described as liquid summer.','NA','Pale Ale','Yards Brewing Company','6.1%'),
+-- YARDS^
+
+('GUINNESS® DRAUGHT','Perfect balance of bitter and sweet with malt and roast characters','Paired well with stews, because of its heavy rich taste','Stout','Guinness','4.2%'),
+('GUINNESS® BLONDE AMERICAN LAGER','Lively mouthfeel, crisp and refreshing with a long malt biscuity finish','Curred Cauliflower Gratin','Blonde Lager','Guinness','5%'),
+('GUINNESS® NITRO IPA','Smooth, creamy and rich with a pleasant bitter hoppy finish','NA','IPA','Guinness','5.8%'),
+('GUINNESS® EXTRA STOUT','Smooth with a slight bite leading to a dry finish','Beef And Oyster Pie','Stout','Guinness','5.6%'),
+('GUINNESS® FOREIGN EXTRA STOUT','Initial tingling impact, bittersweet leading to a dry finish','NA','Stout','Guinness','7.5%'),
+('GUINNESS® DUBLIN PORTER','Smooth easy finish with a medium, sweet mouth feel','Best paired with stews.','Porter','Guinness','3.8%'),
+('GUINNESS® RYE PALE ALE','A medium bodied Pale Ale with new world hop character','NA','Pale Ale','Guinness',' 5%'),
+('GUINNESS® MILK STOUT','Luxuriant full mouthfeel with low lingering bitterness and sweet finish','Best paired with lean meats','Milk Stout','Guinness',' 5%'),
+('GUINNESS® GOLDEN ALE','Slight mouth drying, a refreshingly clean finish with little to no linger','NA','Ale','Guinness','4.5%'),
+('GUINNESS® IRISH WHEAT','Clean, refreshing taste with full body','Slow Roasted BBQ Chicken','Wheat Beer','Guinness','5.3%'),
+-- Guinness^
+
+('Honey Weiss','Featuring a touch of real Wisconsin honey, Leinenkugels® Honey Weiss is a golden-hued traditional American weiss beer inspired by a classic German style. Its traditionally garnished with a lemon wedge for added citrus aroma that perfectly complements the sweet, subtle flavors of the beer','Mexican dishes like nachos and beef burritos.','American weiss beer','Leinenkugels','4.9%'),
+('Sunset Wheat','Our award-winning Belgian-style witbier, Leinenkugels® Sunset Wheat will give you notes of orange and blueberry, and a tart, citrusy finish. Top it with an orange wheel to add another note to the aroma and settle in for a sudsy sunset.','spicy dishes, scallops and Mexican dishes.','Belgian-style witbier','Leinenkugels','4.9%'),
+('Berry Weiss','Crisp weiss beer gets a little lift from an enticing blend of blackberries, elderberries and loganberries that are all indigenous to Wisconsin. Our Leinenkugel’s® Berry Weiss brings them together for a flavor that’s deliciously different and available all year long.','chocolate cake, fresh Caprese salad and creamy spinach and artichoke dip.','Weiss','Leinenkugels',' 4.9%'),
+('Creamy Dark','Our most award-winning beer, Leinenkugel’s® Creamy Dark is brewed with a special blend of seven malts for a rich, nutty cocoa flavor and crisp finish. That makes it one deliciously dark, surprisingly smooth brew. Hey, the name says it all.','spicy stuffed peppers, Cajun-spiced pork chops, and chocolate cake.','American-style Dark Lager','Leinenkugels','4.9%'),
+('LEINENKUGEL’S ORIGINAL','The beer that started it all. Leinenkugel’s® Original is brewed with Pale malts and Cluster hops inspired by our family’s 1867 recipe. Its crisp, classic flavor has been carrying the Leinenkugel® name for six generations.','brats with sauerkraut, cheese curds, Door County fish boils and cherry pie.','American Premium Pilsner','Leinenkugels',' 4.7%'),
+('India Pale Lager (IPL)','Everything you love about hops comes through more clearly because IPL is a lager instead of an ale. We brew ours with five varieties of hops including Mandarina Bavaria from Germany and Citra® from right here in the U.S. We taste citrus, tropical fruit notes and a little spicy pepper followed by a refreshing crisp finish. Give it a try and see what you discover.','Wisconsin cheese curds, salmon or trout, and lemon cake','IPL','Leinenkugels','6%'),
+('Wisconsin Red Pale Ale','We brewed this beer exclusively for Wisconsin. Made with some of the finest quality ingredients, including some hops, barley, oats and water right here in Wisconsin. Its fresh hop aroma and flavor are perfectly balanced by rich malts that give it a distinctive red hue. A unique taste and proud tribute to our home state.','roast chicken, BBQ brisket/ribs, aged cheddar and blueberry cobbler.','PALE ALE','Leinenkugels','5.6%'),
+('Canoe Paddler','Leinenkugel’s® Canoe Paddler® is a slightly spicy and smooth addition to Leinenkugel’s seasonal portfolio. This Kölsch-style beer is brewed with a touch of rye for a slightly spicy flavor and clean, dry finish. It’s our take on a German classic that’s perfect for winding down and relaxing.','Weisswurst, porcini mushroom ravioli with white wine sauce, delicate white fish with capers and arugula salads','Kölsch-style','Leinenkugels',' 5%'),
+('Anniversary Lager','With over 550 years of brewing experience combined, this collaboration between Leinenkugel,s and Hofbräu München celebrates Leinenkugel’s 150th anniversary with a blend of German tradition and American ingenuity. Brewed in the spirit of Reinheitsgebot, Leinenkugel’s Anniversary Lager is a German-style amber lager that incorporates some imported, German malts with unique American hops to create a beer that is flavorful, balanced, and refreshing.','pairs best with hearty and savory foods such as roasted or braised poultry, pretzels or potato salad.','German-style amber lager.','Leinenkugels','5.4%'),
+('Oktoberfest','Our proud German heritage shines through in our homage to arguably the world’s greatest festival. A traditional Märzen-style beer, our Leinenkugel’s® Oktoberfest has a toasted malt flavor and subtle, spicy hop notes that make it perfect for celebrating fall in true German fashion. So let your steins runneth over.','brats, spaetzles, pork chops, soft pretzels and spiced apple cake.','Rich and toasty Märzen-style beer','Leinenkugels','5.1%'),
+('Summer Shandy','Our own unique take on Franz Kugler’s original Munich tavern tradition. Leinenkugel’s® Summer Shandy® is our traditional weiss beer with refreshing natural lemonade flavor that makes it the perfect summer beer.','BBQ chicken, fruit salads, watermelon and freshly caught, grilled fish.','Crisp weiss beer with
+natural lemonade flavor','Leinenkugels',' 4.2%'),
+('Grapefruit Shandy','A traditional shandy is beer mixed with a little something extra, like lemonade, soda or ginger ale. Leinenkugels® Grapefruit Shandy is our take on this tradition. Each batch begins with our traditional weiss beer. We then combine it with natural white grapefruit flavor that adds a note of fresh-cut citrus, because here refreshment is our greatest natural resource.','summer salads, vinaigrette citrus-marinated grilled shrimp and blueberry-lemon cheesecake bars.','Crisp weiss beer with natural grapefruit flavor','Leinenkugels','4.2%'),
+('Watermelon Shandy','Leinenkugel’s Watermelon Shandy is a refreshing addition to our Shandy style brewing tradition. It’s our Weiss beer with a hint of watermelon flavor, perfect for relaxing outdoors.','Roast Melon salad with pancetta and Romano cheese, cucumber salad with feta,  black pepper and lemon vinaigrette, grilled shrimp with balsamic-orange glaze and fresh thyme, or grilled watermelon with Greek yogurt.','Shandy','Leinenkugels','4.2%'),
+('Harvest Patch Shandy','Satisfy your thirst for autumn with our Leinenkugel’s® Harvest Patch® Shandy. It’s our traditional weiss beer with natural pumpkin spice flavor to give you notes of nutmeg, allspice and clove for a refreshing fall seasonal. It’s crisp and smooth, just like a perfect fall day on the Leinie Side.','spicy beef chili or caramel flan.','Crisp weiss beer with natural pumpkin spice flavor','Leinenkugels','4.2%'),
+-- Leinkugels^
+
+('FAT TIRE','Toasty malt, gentle sweetness, flash of fresh hop bitterness. The malt and hops are perfectly balanced.','pair Fat Tire Amber Ale with a salad.  Simple.  Spinach, spiced pecans (cayenne, salt, light brown sugar - toss to coat and toast in oven), apples, and a sherry shallot vinaigrette.','BELGIAN STYLE ALE','New Belgium','5.2%'),
+('CITRADELIC','Starts mildly sweet and transitions to a well-balanced bitterness.','Fish complements this beer very well','TANGERINE IPA','New Belgium','6.0%'),
+('PILSENER','Mild sweetness moves into a light bitterness.','NA','BOHEMIAN STYLE PILSENER','New Belgium','4.8%'),
+('VOODOO RANGER','Lightly sweet at first with a stronger, building and perfect bitterness.','Pair with sharp cheeses like aged cheddars, grilled lamb chops and tomato pie.','IPA','New Belgium','7%'),
+('TRIPPEL','Malty sweet, with clean firm hop bitter balance.','Roasted loin of rabbit with truffle-madiera sauce, Farrotto (farro cooked risotto style with trumpet mushrooms, sage and leeks) and creamed greens (swiss chard, spinach and collard greens)','BELGIAN STYLE ALE','New Belgium','8.5%');
+
+
+
+/*('Evil Twin Double Barrel Jesus', 'thick fudge-like body, pitch black color, amazingly overwhelming aromas of chocolate, coffee, dark fruits and muscovado sugar and by all means aged in barrels and blended into a this very unique and rare tasting version standing in front of you. ', 1, 'American Double / Imperial Stout'),
 ('Miller Lite', 'Miller Lite is the original light beer. Frederick Miller had an idea that a beer could be light but didnt have to sacrifice on taste, and weve held true to that idea since 1975. ', 3, ' pilsner light beer '),
-('Bud ', 'Budweiser is an American-style pale lager produced by Anheuser-Busch, currently part of the multinational corporation Anheuser-Busch InBev.', 3, ' American-style pale lager' ),
+('Bud', 'Budweiser is an American-style pale lager produced by Anheuser-Busch, currently part of the multinational corporation Anheuser-Busch InBev.', 3, ' American-style pale lager' ),
 ('coors light', 'Coors Light is a 4.2% ABV light beer brewed in Golden, Colorado and Milwaukee, Wisconsin. It was first produced in 1978 by the Coors Brewing Company', 3, ' light beer'),
 ('YARDS IPA', 'Standing firmly on the east coast end of American IPAs, our India Pale Ale emphasizes balance. Traditional floor-malted English barley gives IPA its firm malt character while generous amounts of Chinook and Amarillo hops impart aromas of pine and tangerine for a perfectly balanced IPA.', 4, 'IPA'),
 ('YARDS ESA', 'Our first-ever and most-beloved brew, ESA helped establish a following for cask-conditioned beer in the United States back in the ‘90s. East Kent Golding hops give this British-inspired ale a subtle spiciness, which complements the strong malt backbone. ESA is floral, earthy and smooth with hints of chocolate and caramel, rounding out this deep chestnut-colored ale', 4, 'English Ale'),
@@ -136,10 +188,28 @@ INSERT INTO beers(name, description, Fid, style) VALUES
 ('90 minute IPA', 'Esquire Magazine calls our 90 Minute I.I.PA., "perhaps the best I.P.A. in America." An Imperial I.P.A. brewed to be savored from a snifter. A big beer with a great malt backbone that stands up to the extreme hopping rate. This beer is an excellent candidate for use with Randall The Enamel Animal! ', 4, 'Imperial IPA'),
 ('Miller High Life', 'THERE’S A WHOLE LOT OF TRADITION THAT GOES INTO MAKING MILLER HIGH LIFE. WE BREW THE GOLDEN PILSNER WITH THE YEAST OUR FOUNDER BROUGHT OVER FROM GERMANY, LIGHT STABLE GALENA HOPS FROM THE PACIFIC NORTHWEST, AND A SELECT COMBINATION OF MALTED BARLEY. THIS COMBINATION MADE IT A FAVORITE IN 1903, AND IT REMAINS ONE TODAY.', 1, 'American-style Pilsner'),
 ('Heinken', 'Heineken Lager Beer, or simply Heineken is a pale lager beer with 5% alcohol by volume produced by the Dutch brewing company Heineken International. Heineken is well known for its signature green bottle and red star', 3, 'pale lager beer'),
-('Summer Shandy', 'Leinenkugels Summer Shandy is our traditional weiss beer with refreshing natural lemonade flavor that makes it the perfect summer beer', 4, 'weiss beer');
+('Summer Shandy', 'Leinenkugels Summer Shandy is our traditional weiss beer with refreshing natural lemonade flavor that makes it the perfect summer beer', 4, 'weiss beer');*/
 
 INSERT INTO waters(name, description, Fid) VALUES
 ('deer park', 'wet', 1);
 
 INSERT INTO related(name, description, Rid) VALUES
-('ipa', 'hoppy', 1)
+('ipa', 'hoppy', 1);
+
+INSERT INTO coffee(name,description,origin) VALUES
+('Caffè Americano','Caffè Americano or Americano is a style of coffee prepared by brewing espresso with added hot water, giving it a similar strength to, but different flavor from drip coffee','Italy, Latin America'),
+('Ristretto','Ristretto is traditionally a short shot of espresso coffee made with the normal amount of ground coffee but extracted with about half the amount of water.','Italy'),
+('Flat white','A flat white is an espresso based coffee beverage. The beverage is prepared by pouring microfoam (steamed milk consisting of small, fine bubbles with a glossy or velvety consistency) over a single or double shot of espresso. It is somewhat similar to the traditional 140 ml (5 imp fl oz) caffè latte although smaller in volume and less microfoam, therefore having a higher proportion of coffee to milk, and milk that is more velvety in consistency – allowing the espresso to dominate the flavour, while being supported by the milk.','both Australia and New Zealand claiming invention'),
+('Affogato','An affogato (Italian, "drowned") is a coffee-based dessert. It usually takes the form of a scoop of vanilla gelato or ice cream topped or "drowned" with a shot of hot espresso. Some variations also include a shot of amaretto, Bicerin or other liqueur. It is considered one drink, not a combination of coffee and ice cream.','Italy'),
+('Long black','A long black is made by pouring a double-shot of espresso or ristretto over hot water. Usually the water is also heated by the espresso machine','commonly found in Australia and New Zealand.'),
+('Caffè mocha','Caffè mocha, in its most basic formulation, can also be referred to as hot chocolate with (e.g., a shot of) espresso added. Like cappuccino, caffè mochas typically contain the distinctive milk froth on top, although, as is common with hot chocolate, they are sometimes served with whipped cream instead. They are usually topped with a dusting of either cinnamon or cocoa powder, and marshmallows may also be added on top for flavor and decoration.','NA'),
+('Latte','A latte is a coffee drink made with espresso and steamed milk. The term as used in English is a shortened form of the Italian caffè latte, caffelatte or caffellatte, which means "milk coffee".',' Italy'),
+('Cappuccino','A cappuccino is an Italian coffee drink that is traditionally prepared with double espresso, hot milk, and steamed milk foam. Variations of the drink involve the use of cream instead of milk, and flavoring with cinnamon or chocolate powder.','Italy'),
+('Instant coffee','Instant coffee, also called soluble coffee, coffee crystals, and coffee powder, is a beverage derived from brewed coffee beans that enables people to quickly prepare hot coffee by adding hot water to the powder or crystals and stirring.','France'),
+('Frappé coffee','The spray-dried instant coffee contains nearly no oil, just tiny particles (coffee solids), some molecules responsible for flavour and taste, and caffeine. When dissolved, spray-dried coffee forms a simpler and more stable colloid relative to traditionally brewed coffee. This enables creation of the characteristic thick frothy layer at the top of the coffee. This layer appears similar to crema, the foam found in espresso, but is much thicker and the composition is different. It can be characterised mainly as a three phase colloid where tiny bubbles are held together by the coffee solids.
+The absence of oil (or the significantly lower oil content compared to traditionally brewed coffee) makes the system more stable and the bubbles do not collapse with the same ease as in crema. Soon after the foam is created, a process of thickening takes place where water molecules are constantly pushed out of the frothy mixture. The water is pushed out due to drainage occurring due to pressure differentials along the foam septum. Higher viscosity will retard the phenomenon, and that is the reason that the addition of sugar will create a better foam. The phenomenon continues until bubbles come very close together and the foam almost solidifies. This process can take between 2 minutes to 10 minutes and depends strongly on the agitation process during mixing. As the bubbles come closer together they will slowly start to coalesce and create bigger bubbles. According to the Laplace pressure equation, variation in bubble size will result in faster collapsing of the bubbles since the bigger bubbles will consume the smaller ones. Hand-mixers create smaller and more uniformly sized bubbles. The smaller bubble size reduces the bubble pressure gradient and forms a much longer lasting foam.
+The presence of oil (a hydrophobic agent) can significantly accelerate the collapsing process localized reduction in the foam elasticity, resulting in the creation of a lighter foam with average bubble diameter larger than 4 mm. This is the reason it is not possible to make a good frappé in many countries, unless one can find spray-dried coffee (which is actually generally less expensive than freeze-dried instant coffee). The utilization of a hand mixer makes possible the creation of finer bubbles which increases the time that the foam can last. The best frappé coffees are often held to be those with the smallest bubbles and a thickness of about 1.5 inches to 2 inches (30 mm to 50 mm) of foam.','Thessaloniki'),
+('Doppio','Doppio in espresso is a double shot, extracted using a double coffee filter in the portafilter. This results in 60 ml of drink, double the amount of a single shot espresso.','Italy'),
+('Irish coffee','rish coffee is a cocktail consisting of hot coffee, Irish whiskey, and sugar, stirred, and topped with thick cream. The coffee is drunk through the cream.','Different variations of coffee cocktails pre-date the now-classic Irish coffee by at least 100 years'),
+('Cortado','A cortado is a beverage that consists of espresso coffee mixed with a roughly equal amount of warm milk to reduce the acidity. The milk in a cortado is usually dense rather than frothy or foamy.','Cuba'),
+('Turkish coffee','Turkish coffee is a method of preparing unfiltered coffee. Roasted and then finely ground coffee beans are simmered in a pot, optionally with sugar, and served in a cup where the grounds are allowed to settle.','Yemen');
