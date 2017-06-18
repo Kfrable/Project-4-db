@@ -15,6 +15,7 @@ function getBeers(req, res, next) {
       .catch((err) => { return next(err); });
 }
 
+
 function getABeer(req,res,next){
 	let item = req.params.name
 	db.one('SELECT * FROM beers WHERE name = $1 ' , item )
@@ -83,6 +84,26 @@ function getFood(req,res,next){
      .catch((err) => { return next(err); });
 }
 
+function getcoffee(req, res, next) {
+    db.any('SELECT * FROM coffee')
+      // .then((data) => { res.json({ allMovies: data}); })
+      .then((data) => { res.status(200).json({ coffee: data}); })
+      .catch((err) => { return next(err); });
+}
+
+
+function getAcoffee(req,res,next){
+	let item = req.params.name
+	db.one('SELECT * FROM coffee WHERE name = $1 ' , item )
+	.then((data) => { res.status(200).json({ coffee: data}); })
+     .catch((err) => { return next(err); });
+}
+
+function deletecoffee(req,res,next) {
+	let byebye =parseInt(req.params.id)
+	db.any('delete from coffee where id = $1', byebye)
+}
+
 
 
 module.exports = {
@@ -95,7 +116,10 @@ module.exports = {
 	getOneWater:getOneWater,
 	deleteBeer:deleteBeer,
 	deleteWine:deleteWine,
-	deleteWater:deleteWater
+	deleteWater:deleteWater,
+	getcoffee:getcoffee,
+	getAcoffee:getAcoffee,
+	deletecoffee:deletecoffee
 	
 
 }

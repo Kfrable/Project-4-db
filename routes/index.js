@@ -22,6 +22,10 @@ router.get('/waters/:name', db.getOneWater);
 router.delete('/waters/:id',db.deleteWater);
 // router.post('/',db.createWaters);
 
+router.get('/coffee', db.getcoffee);
+router.get('/coffee/:name', db.getAcoffee);
+router.delete('/coffee/:id',db.deletecoffee);
+
 router.get('/food', db.getFood)
 
 
